@@ -1,0 +1,5 @@
+"""后端启动入口：cd backend && python run.py（端口 8000）"""
+import uvicorn
+
+if __name__ == "__main__":
+    uvicorn.run("app.main:app", host="127.0.0.1", port=8000)

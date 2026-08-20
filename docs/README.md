@@ -16,7 +16,7 @@
 
 | 阶段 | 模块 | 步骤数 | 完成 | 进行中 | 未开始 | 最近存档 |
 |------|------|--------|------|--------|--------|----------|
-| Phase 0 | A 平台底座（core/鉴权/模型生命周期/种子数据） | 8 | 2 | 1 | 5 | 存档5 |
+| Phase 0 | A 平台底座（core/鉴权/模型生命周期/种子数据） | 8 | 8 | 0 | 0 | 存档6 ✅ |
 | Phase 1 | B 视觉检测域（检测器/零样本/视频/实时/路由/前端骨架） | 12 | 0 | 0 | 12 | — |
 | Phase 2 | C 数据闭环域（数据集/训练/VLM/RAG/路由生产化） | 11 | 0 | 0 | 11 | — |
 | Phase 3 | D 运营闭环域（告警/工单/漂移/运维） | 6 | 0 | 0 | 6 | — |
@@ -24,10 +24,10 @@
 
 ## 当前焦点
 
-- **当前阶段**：Phase 0（项目骨架与全量建表）
-- **当前步骤**：T0-3 全量建表（🔨 第一步 models.py ✅，第二步 database.py 待写）
-- **当前分支**：`phase0-foundation`
-- **最近存档**：存档5（T0-3 第一步 models.py）
+- **当前阶段**：Phase 1（核心闭环补齐：真 YOLO 检测 + 零样本 + 视频/实时 + 前端骨架）
+- **当前步骤**：T7.5-1 BaseDetector + UltralyticsDetector（⬜ 待开始）
+- **当前分支**：`phase1-detection`（Phase 0 的 `phase0-foundation` 已合并 main）
+- **最近存档**：存档6（Phase 0 完成）
 
 ## 存档记录
 
@@ -39,3 +39,4 @@
 | 存档3 | T0-2 requirements.txt（进度保存，待 pip install 与审核） | phase0-foundation | ✅ 已推送 |
 | 存档4 | T0-2 依赖安装完成（conda omnisight，依赖复检全过） | phase0-foundation | ✅ 已推送 |
 | 存档5 | T0-3 第一步 models.py（28 表 ORM，验证通过） | phase0-foundation | ✅ 已推送 |
+| 存档6 | Phase 0 完成（后端骨架+种子+鉴权+前端骨架，验收通过） | phase0-foundation | ✅ 已推送 |

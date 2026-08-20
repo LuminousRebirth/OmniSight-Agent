@@ -11,7 +11,7 @@ python-dotenv>=1.0
 
 # ---- Auth (JWT + bcrypt) ----
 PyJWT>=2.9
-passlib[bcrypt]>=1.7.4
+bcrypt>=4.0
 
 # ---- Detection / Vision (YOLO26) ----
 ultralytics>=8.4.0

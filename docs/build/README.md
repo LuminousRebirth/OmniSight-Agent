@@ -8,7 +8,7 @@
 
 | 阶段 | 文档 | 步骤 | ✅ | 🔨 | ⬜ |
 |------|------|------|----|----|----|
-| Phase 0 | [phase0-foundation.md](phase0-foundation.md) | 8 | 2 | 1 | 5 |
+| Phase 0 | [phase0-foundation.md](phase0-foundation.md) | 8 | 8 | 0 | 0 |
 | Phase 1 | [phase1-detection.md](phase1-detection.md) | 12 | 0 | 0 | 12 |
 | Phase 2 | [phase2-data-loop.md](phase2-data-loop.md) | 11 | 0 | 0 | 11 |
 | Phase 3 | [phase3-operations.md](phase3-operations.md) | 6 | 0 | 0 | 6 |
@@ -24,3 +24,4 @@
 | 存档3 | T0-2 requirements.txt（进度保存，待 pip install 与审核） | phase0-foundation | archive/3 | ✅ 已推送 |
 | 存档4 | T0-2 依赖安装完成（conda omnisight 环境，依赖复检全过） | phase0-foundation | archive/4 | ✅ 已推送 |
 | 存档5 | T0-3 第一步 models.py（28 表 ORM，冒烟验证通过） | phase0-foundation | archive/5 | ✅ 已推送 |
+| 存档6 | Phase 0 完成（后端骨架+种子+鉴权+前端骨架，验收通过） | phase0-foundation | archive/6 | ✅ 已推送 |

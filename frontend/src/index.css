@@ -1,0 +1,22 @@
+/* 简约白蓝基础样式（docs/architecture/06-frontend-style.md） */
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --primary: #2563eb;
+  --primary-soft: #eff6ff;
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+/* 监控数据等宽字体（bbox/置信度/FPS） */
+.mono { font-family: "JetBrains Mono", Consolas, monospace; }
