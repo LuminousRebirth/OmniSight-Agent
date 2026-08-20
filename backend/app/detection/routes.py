@@ -109,12 +109,34 @@ async def _run_video(task_id: str, path: str, model_name: str, weights: str | No
              "detections": [d.__dict__ | {"bbox": list(d.bbox)} for d in r["detections"]]}
             for r in results
         ]
+        task["analysis"] = _analyze_first_frame(path, results) if results else None
         task["status"] = "completed"
     except Exception as exc:
         task["status"] = "failed"
         task["error"] = str(exc)
     finally:
         Path(path).unlink(missing_ok=True)
+
+
+def _analyze_first_frame(path: str, results: list[dict]) -> dict | None:
+    """对首个确认帧执行 VLM 分析（无 API Key 自动降级规则兜底）"""
+    import cv2
+    from ..vlm.factory import get_provider
+    from ..vlm.templates import build_prompt
+
+    cap = cv2.VideoCapture(path)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, results[0]["frame_no"])
+    ok, frame = cap.read()
+    cap.release()
+    if not ok:
+        return None
+    ok, buf = cv2.imencode(".jpg", frame)
+    if not ok:
+        return None
+    fused = get_provider().analyze(buf.tobytes(),
+                                   build_prompt("视频检测分析",
+                                                [d.class_name for d in results[0]["detections"]]))
+    return {"severity": fused.severity, "description": fused.description, "action": fused.action}
 
 
 @router.get("/tasks/{task_id}")

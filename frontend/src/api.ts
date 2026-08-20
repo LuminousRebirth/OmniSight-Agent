@@ -26,6 +26,7 @@ export interface VideoTask {
   model: string;
   frames_total: number;
   results: { frame_no: number; detections: Detection[] }[];
+  analysis?: { severity: string; description: string; action: string } | null;
   error?: string;
 }
 
@@ -111,5 +112,37 @@ export async function liveStart(cameraId: number, resolutionMode = "smooth"): Pr
 /** 停止实时检测流 */
 export async function liveStop(streamId: string): Promise<{ frames_processed: number; alerts_count: number }> {
   const { data } = await axios.post(`/api/detect/live/${streamId}/stop`);
+  return data;
+}
+
+/** Agent 对话（带图则检测+VLM 分析） */
+export interface AgentChatResult {
+  reply: string;
+  trace_id?: string | null;
+  detections: Detection[];
+}
+
+export async function agentChat(text: string, file?: File): Promise<AgentChatResult> {
+  const form = new FormData();
+  form.append("text", text);
+  if (file) form.append("file", file);
+  const { data } = await axios.post<AgentChatResult>("/api/agent/chat", form);
+  return data;
+}
+
+/** VLM 智能分析（FusedResult） */
+export interface AnalysisResult {
+  detections: Detection[];
+  severity: string;
+  description: string;
+  action: string;
+  references: string[];
+}
+
+export async function analyzeImage(file: File, userText = ""): Promise<AnalysisResult> {
+  const form = new FormData();
+  form.append("file", file);
+  form.append("user_text", userText);
+  const { data } = await axios.post<AnalysisResult>("/api/analysis/image", form);
   return data;
 }

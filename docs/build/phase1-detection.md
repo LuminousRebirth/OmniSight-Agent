@@ -66,9 +66,9 @@
 - 审核：⏳ Phase 1 统一审核
 - 存档：-
 
-### T7.12-6 · 对话分析页（推理轨迹基础版）
+### T7.12-6 · 对话分析页 → Agent 智能体对话窗口
 - 状态：✅ 完成
-- 改动文件：frontend/src/pages/ChatPage.tsx（上传+意图 → 路由 → 画框 + Timeline 轨迹回放含耗时）
+- 改动文件：agent/routes.py（POST /api/agent/chat：带图→检测+VLM 分析回复；纯文本→引导）+ frontend/pages/ChatPage.tsx（多轮聊天窗口：气泡/附图/发送）+ DetectPage 加"智能分析"tab（VLM 结论 severity/处置建议）；curl + tsc 验证通过
 - 审核：⏳ Phase 1 统一审核
 - 存档：-
 

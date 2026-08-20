@@ -16,9 +16,12 @@ class Settings(BaseSettings):
     secret_key: str = "omnisight-dev-secret-change-me"
     token_expire_minutes: int = 720  # 12h
 
-    # VLM Provider（Phase 2 用）：默认 + 降级顺序
+    # VLM Provider（Phase 2）：默认 + 降级顺序
     vlm_default: str = "dashscope"
     vlm_fallback: str = "local"
+    dashscope_api_key: str = ""  # 通义千问 VL（.env: OMNI_DASHSCOPE_API_KEY）
+    openai_api_key: str = ""     # GPT-4o / 兼容中转（.env: OMNI_OPENAI_API_KEY）
+    openai_base_url: str = "https://api.openai.com/v1"
 
     # 存储
     data_dir: str = str(PROJECT_ROOT / "data")

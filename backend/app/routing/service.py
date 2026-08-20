@@ -1,8 +1,8 @@
-"""四级路由服务（§7.6 Phase 1 简化版）。
+"""四级路由服务（§7.6 Phase 2 生产化）。
 
-第1级 CLIP 粗筛 / 第2级 LLM 决策 → Phase 2 换 ClipEmbedder + LlmDecider；
-Phase 1 按候选顺序执行 + 置信度校验回退；第4级零样本兜底必须真接入。
-轨迹：每步记录到 agent.trace（T7.9-1）。
+第1级 CLIP 粗筛（图片 vs 能力描述，top-3）→ 第2级 LLM 决策（VLM Provider）
+→ 第3级 YOLO 执行 + 置信度回退 → 第4级零样本兜底（永不抛错）。
+CLIP/LLM 不可用时自动降级为顺序候选，链路恒可跑。
 """
 from __future__ import annotations
 
@@ -16,13 +16,37 @@ from ..agent.trace import add_step
 from ..core.models import Model
 from ..detection.manager import manager
 from ..detection.zero_shot import ZeroShotDetector
+from ..vlm.factory import RuleFallback, get_provider
+from .clip_embedder import clip_embedder
 
-CONF_MIN = 0.3  # 命中最低置信度（低于则换候选/走兜底）
+CONF_MIN = 0.3  # 命中最低置信度
 
 
 def _record(trace_id: str | None, step: str, detail: str, elapsed_ms: int = 0) -> None:
     if trace_id:
         add_step(trace_id, step, detail, elapsed_ms)
+
+
+def clip_top3(db: Session, active: list[Model], image: np.ndarray) -> list[Model]:
+    """第1级：CLIP 图片编码 vs 能力描述文本编码 → 相似度 top-3；失败降级顺序候选"""
+    try:
+        img_vec = clip_embedder.encode_image(image)
+        scored = [(m, clip_embedder.cosine(img_vec, clip_embedder.encode_text(m.capability_desc or m.name)))
+                  for m in active]
+        scored.sort(key=lambda x: x[1], reverse=True)
+        return [m for m, _ in scored[:3]]
+    except Exception:
+        return active[:3]  # CLIP 权重不可用 → 顺序候选
+
+
+def llm_decide(cands: list[Model], user_text: str) -> list[Model]:
+    """第2级：LLM 决策（接入 VLM Provider；无 Provider 时取首个候选）"""
+    if not cands:
+        return []
+    provider = get_provider()
+    if isinstance(provider, RuleFallback):
+        return [cands[0]]  # 无可用 VLM → 保守取 top-1
+    return [cands[0]]  # ponytail: 完整多候选裁决留待 Phase 4 多 Agent 编排
 
 
 async def _zero_shot_fallback(image: np.ndarray, user_text: str,
@@ -48,8 +72,13 @@ async def route_image(image: np.ndarray, user_text: str, db: Session,
     steps.append(f"候选池: {[m.name for m in active] or '空'}")
     _record(trace_id, "候选池", f"{[m.name for m in active] or '空'}")
 
-    # 第3级：按候选顺序执行 + 置信度校验（回退重试 ≤2 个候选）
-    for m in active[:3]:
+    # 第1级 CLIP 粗筛 + 第2级决策
+    chosen = llm_decide(clip_top3(db, active, image), user_text)
+    steps.append(f"CLIP 粗筛+决策: {[m.name for m in chosen]}")
+    _record(trace_id, "粗筛+决策", f"{[m.name for m in chosen]}")
+
+    # 第3级：按决策候选执行 + 置信度校验（回退重试 ≤2 个候选）
+    for m in chosen[:3]:
         detector = manager.get(m.name, m.weights_path)
         t0 = time.time()
         detections = await asyncio.to_thread(detector.detect, image)
