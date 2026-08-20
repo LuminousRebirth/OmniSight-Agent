@@ -12,13 +12,13 @@
 - 存档：存档2（tag: archive/2）
 
 ### T0-2 · requirements.txt 与依赖安装
-- 状态：🔨 进行中（requirements.txt 已写，pip install 待执行）
-- 改动文件：requirements.txt
-- 审核：⏳ 待用户审核
-- 存档：存档3（进度保存）
+- 状态：✅ 完成
+- 改动文件：requirements.txt；环境 conda omnisight（Python 3.11.15），deps 清华源安装到位（ultralytics 8.4.123 / pymilvus 3.0.1）
+- 审核：✅ 用户已通过（依赖复检全过）
+- 存档：存档4（tag: archive/4）
 
 ### T0-3 · 全量建表（28 张）
-- 状态：⬜ 未开始
+- 状态：⬜ 未开始（schema 草案已就绪：`docs/architecture/07-db-schema.md`，待审阅确认）
 - 改动文件：-
 - 审核：-
 - 存档：-

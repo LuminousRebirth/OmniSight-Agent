@@ -8,7 +8,7 @@
 
 | 阶段 | 文档 | 步骤 | ✅ | 🔨 | ⬜ |
 |------|------|------|----|----|----|
-| Phase 0 | [phase0-foundation.md](phase0-foundation.md) | 8 | 1 | 1 | 6 |
+| Phase 0 | [phase0-foundation.md](phase0-foundation.md) | 8 | 2 | 0 | 6 |
 | Phase 1 | [phase1-detection.md](phase1-detection.md) | 12 | 0 | 0 | 12 |
 | Phase 2 | [phase2-data-loop.md](phase2-data-loop.md) | 11 | 0 | 0 | 11 |
 | Phase 3 | [phase3-operations.md](phase3-operations.md) | 6 | 0 | 0 | 6 |
@@ -22,3 +22,4 @@
 | 存档1 | 文档目录化落盘（architecture 5份 + build 5份 + 总览） | phase0-foundation | archive/1 | ✅ 已推送 |
 | 存档2 | T0-1 目录结构（12 包 + frontend/data/scripts/infra） | phase0-foundation | archive/2 | ✅ 已推送 |
 | 存档3 | T0-2 requirements.txt（进度保存，待 pip install 与审核） | phase0-foundation | archive/3 | ✅ 已推送 |
+| 存档4 | T0-2 依赖安装完成（conda omnisight 环境，依赖复检全过） | phase0-foundation | archive/4 | ✅ 已推送 |
