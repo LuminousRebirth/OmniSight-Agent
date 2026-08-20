@@ -1,0 +1,39 @@
+# ── Python ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── 模型权重 / ONNX（体积大，不入库；引用外部路径）──────
+*.pt
+*.onnx
+*.engine
+weights/
+
+# ── 本地数据（SQLite / 素材 / 上传文件）────────────────
+data/
+*.db
+*.sqlite
+*.sqlite3
+
+# ── 前端 ───────────────────────────────────────────────
+node_modules/
+dist/
+frontend/dist/
+*.local
+
+# ── IDE / 系统 ─────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+.DS_Store
+
+# ── 日志 ───────────────────────────────────────────────
+*.log
+logs/
