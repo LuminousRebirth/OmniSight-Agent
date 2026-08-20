@@ -6,10 +6,10 @@
 ## 步骤清单
 
 ### T0-1 · 初始化目录结构
-- 状态：⬜ 未开始
-- 改动文件：-
-- 审核：-
-- 存档：-
+- 状态：✅ 完成
+- 改动文件：backend/app/{core,model_lifecycle,routing,detection,agent,datasets,training,vlm,rag,alerts,mcp,system}/、frontend/、data/、scripts/、infra/（.gitkeep 占位）
+- 审核：✅ 用户已通过
+- 存档：存档2（tag: archive/2）
 
 ### T0-2 · requirements.txt 与依赖安装
 - 状态：⬜ 未开始

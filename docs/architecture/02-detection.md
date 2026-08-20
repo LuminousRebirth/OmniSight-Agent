@@ -7,7 +7,7 @@
 
 ```
 BaseDetector (load_model / detect / warmup / unload)
- ├── UltralyticsDetector   ← 真 YOLO：加载注册表权重推理（helmet_v26 挂 best.pt）
+ ├── UltralyticsDetector   ← 真 YOLO26：加载注册表权重推理（helmet_v26 挂 best.pt）
  ├── ZeroShotDetector      ← YOLO-World 按文本提示词检测任意类别（Phase 1 起内置，权重后装）
  ├── StubDetector          ← 无权重/无 GPU 环境模拟输出，保证链路恒可跑
  └── DetectorManager       ← 注册中心 + 懒加载 + LRU 显存卸载 + 路由分发

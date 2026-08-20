@@ -23,7 +23,7 @@
 ├──────────────────────────────────────────────────────────┤
 │ 能力层 检测(插件化+零样本) │ VLM(双通道) │ RAG │ 训练 │ 告警 │
 ├──────────────────────────────────────────────────────────┤
-│ 数据层  SQLite(起步) │ 本地文件(data/) │ numpy向量(起步,可换Milvus)│
+│ 数据层  SQLite(起步) │ 本地文件(data/) │ Milvus(Lite起步,可升Standalone)│
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -31,16 +31,22 @@
 
 | 层 | 选型 | 用途 |
 |----|------|------|
-| 前端 | React 18 + Vite + TypeScript | SPA；ECharts 指标曲线；ReactFlow Agent 画布；Ant Design 管理组件 |
+| 语言 | Python 3.11 | 类型注解完备（R7） |
+| 前端 | React 18 + Vite + TypeScript | SPA；**简约白蓝风格**；ECharts 指标曲线；ReactFlow Agent 画布；Ant Design 管理组件 |
+| 前端状态 | axios + zustand | API 封装 + 轻量状态管理（WS 数据流） |
 | 后端 | FastAPI + Uvicorn | REST + WebSocket + OpenAPI |
-| 检测 | Ultralytics YOLO + PyTorch | 训练/推理/导出一体 |
+| 数据访问 | SQLAlchemy 2.0 声明式 ORM | 28 表映射，可换 PostgreSQL |
+| 配置 | pydantic-settings + .env | Provider 密钥/权重路径/降级顺序 |
+| 鉴权 | PyJWT + passlib[bcrypt] | JWT + admin/operator/viewer 角色依赖 |
+| 任务队列 | asyncio 后台任务（Celery 后装） | 长任务异步化（task_id + 状态表） |
+| 检测 | Ultralytics YOLO26 + PyTorch | 训练/推理/导出一体（最新版） |
 | 视频 | OpenCV VideoCapture + ffmpeg | USB/OBS 虚拟摄像头/RTSP 拉流 |
 | 元数据 | SQLite（连接层封装，可换 PostgreSQL） | 模型/数据集/任务/告警/记忆 |
 | 对象存储 | 本地文件系统 `data/`（接口对齐 MinIO/S3） | 图像/权重/标注 |
-| 向量 | numpy 内存实现（向量化工厂封装，可换 Milvus/ES） | 能力/记忆/知识向量 |
+| 向量 | Milvus（Lite 起步，可升级 Docker Standalone） | 能力/记忆/知识向量 |
 | 路由粗筛 | CLIP（open_clip） | 图片语义编码/相似度 |
 | 零样本 | YOLO-World（提示词检测，可后装） | 未训练类别兜底 |
-| VLM | 通义千问VL / OpenAI 兼容 / 本地 Qwen2.5-VL | Provider 抽象双通道 |
+| VLM | 通义千问VL / OpenAI 兼容 / 本地 Qwen2.5-VL | Provider 抽象双通道（httpx 异步调用） |
 | 文本检索 | bge-m3 编码 + bge-reranker 重排（Phase 2 可后装） | RAG 中文检索 |
 
 ## 4. 设计原则（贯穿所有模块）
@@ -61,7 +67,7 @@
 | 训练 | PyTorch 本地（GPU/CPU 自适应） | 预留接口位 | 训练执行器抽象 |
 | VLM | 本地 Qwen2.5-VL（可选装） | 通义千问VL / OpenAI 兼容 | Provider 配置切换 + 自动降级 |
 | 零样本 | YOLO-World（本地权重） | — | 纯本地 |
-| 向量 | numpy 起步 | Milvus 接口对齐 | 向量化工厂封装 |
+| 向量 | Milvus Lite（本地嵌入式） | Milvus Standalone（Docker 升级） | pymilvus 统一客户端 |
 | 路由 | CLIP 粗筛本地 | LLM 决策器走云端 VLM | 四级路由逐级降级 |
 
 ## 6. 能力域划分（13 模块 → 5 能力域）
@@ -94,6 +100,9 @@
 | 4 | 种子模型权重 | 自训权重（helmet 已定位，见 01-foundation） |
 | 5 | helmet 权重 | `E:\python_code\yolo\runs\models\ppe\HHW_noperson\finetune-4\weights\best.pt`，2 类 [no_helmet, helmet]，imgsz 960 |
 | 6 | 工作区 | 从 0 构建（仅 docs 两份文档） |
+| 7 | 技术选型 | SQLAlchemy 2.0 ORM + asyncio 后台任务 + Python 3.11 + zustand（已确认） |
+| 8 | 检测/向量选型 | YOLO26（ultralytics 最新版）+ Milvus Lite 起步（可升级 Docker Standalone）（已确认） |
+| 9 | 前端视觉 | 简约白蓝风格（frontend-design skill 生成） |
 
 ## 9. 工程流程约定（已与用户确认）
 
