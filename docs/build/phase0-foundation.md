@@ -18,10 +18,10 @@
 - 存档：存档4（tag: archive/4）
 
 ### T0-3 · 全量建表（28 张）
-- 状态：⬜ 未开始（schema 草案已就绪：`docs/architecture/07-db-schema.md`，待审阅确认）
-- 改动文件：-
-- 审核：-
-- 存档：-
+- 状态：🔨 进行中（第一步 models.py 完成 ✅，第二步 database.py 待写）
+- 改动文件：backend/app/core/models.py（28 表 ORM，验证通过）、backend/{__init__.py, app/__init__.py, app/core/__init__.py}
+- 审核：✅ 用户已通过（第一步）
+- 存档：存档5（tag: archive/5）
 
 ### T0-4 · main.py/run.py + 种子数据注入
 - 状态：⬜ 未开始
