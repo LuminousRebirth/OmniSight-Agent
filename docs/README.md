@@ -16,7 +16,7 @@
 
 | 阶段 | 模块 | 步骤数 | 完成 | 进行中 | 未开始 | 最近存档 |
 |------|------|--------|------|--------|--------|----------|
-| Phase 0 | A 平台底座（core/鉴权/模型生命周期/种子数据） | 8 | 1 | 0 | 7 | 存档2 |
+| Phase 0 | A 平台底座（core/鉴权/模型生命周期/种子数据） | 8 | 1 | 1 | 6 | 存档3 |
 | Phase 1 | B 视觉检测域（检测器/零样本/视频/实时/路由/前端骨架） | 12 | 0 | 0 | 12 | — |
 | Phase 2 | C 数据闭环域（数据集/训练/VLM/RAG/路由生产化） | 11 | 0 | 0 | 11 | — |
 | Phase 3 | D 运营闭环域（告警/工单/漂移/运维） | 6 | 0 | 0 | 6 | — |
@@ -25,9 +25,9 @@
 ## 当前焦点
 
 - **当前阶段**：Phase 0（项目骨架与全量建表）
-- **当前步骤**：T0-2 requirements.txt（⬜ 待开始）
+- **当前步骤**：T0-2 requirements.txt（🔨 进行中：已写文件，待 pip install 与审核）
 - **当前分支**：`phase0-foundation`
-- **最近存档**：存档2（T0-1 目录结构）
+- **最近存档**：存档3（T0-2 进度保存）
 
 ## 存档记录
 
@@ -36,3 +36,4 @@
 | first commit | 项目基础文档 + README + .gitignore | main | ✅ 已推送 GitHub |
 | 存档1 | 文档目录化落盘（architecture 5份 + build 5份 + 总览） | phase0-foundation | ✅ 已推送 |
 | 存档2 | T0-1 目录结构（12 包 + frontend/data/scripts/infra） | phase0-foundation | ✅ 已推送 |
+| 存档3 | T0-2 requirements.txt（进度保存，待 pip install 与审核） | phase0-foundation | ✅ 已推送 |

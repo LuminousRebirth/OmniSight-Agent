@@ -12,10 +12,10 @@
 - 存档：存档2（tag: archive/2）
 
 ### T0-2 · requirements.txt 与依赖安装
-- 状态：⬜ 未开始
-- 改动文件：-
-- 审核：-
-- 存档：-
+- 状态：🔨 进行中（requirements.txt 已写，pip install 待执行）
+- 改动文件：requirements.txt
+- 审核：⏳ 待用户审核
+- 存档：存档3（进度保存）
 
 ### T0-3 · 全量建表（28 张）
 - 状态：⬜ 未开始
