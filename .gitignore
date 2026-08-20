@@ -25,6 +25,7 @@ data/
 node_modules/
 dist/
 frontend/dist/
+frontend/.vite/          # vite 依赖预构建缓存
 *.local
 
 # ── npm 本地缓存（工作区内，不入库）──────────────────────

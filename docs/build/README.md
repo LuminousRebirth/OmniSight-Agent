@@ -9,7 +9,7 @@
 | 阶段 | 文档 | 步骤 | ✅ | 🔨 | ⬜ |
 |------|------|------|----|----|----|
 | Phase 0 | [phase0-foundation.md](phase0-foundation.md) | 8 | 8 | 0 | 0 |
-| Phase 1 | [phase1-detection.md](phase1-detection.md) | 12 | 0 | 0 | 12 |
+| Phase 1 | [phase1-detection.md](phase1-detection.md) | 12 | 12 | 0 | 0 |
 | Phase 2 | [phase2-data-loop.md](phase2-data-loop.md) | 11 | 0 | 0 | 11 |
 | Phase 3 | [phase3-operations.md](phase3-operations.md) | 6 | 0 | 0 | 6 |
 | Phase 4 | [phase4-ecosystem.md](phase4-ecosystem.md) | 5 | 0 | 0 | 5 |

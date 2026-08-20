@@ -11,10 +11,14 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from .agent.routes import router as agent_router
 from .core.database import SessionLocal, init_db
 from .core.seed import seed_all, seed_report
 from .datasets.routes import router as tasks_router
+from .detection.live import router as live_router
+from .detection.routes import router as detect_router
 from .model_lifecycle.routes import router as model_router
+from .routing.routes import router as route_router
 from .system.auth import router as auth_router
 
 
@@ -35,6 +39,10 @@ app = FastAPI(title="OmniSight-Agent", version="0.1.0", lifespan=lifespan)
 app.include_router(model_router, prefix="/api")
 app.include_router(tasks_router, prefix="/api")
 app.include_router(auth_router, prefix="/api")
+app.include_router(detect_router, prefix="/api")
+app.include_router(live_router, prefix="/api")
+app.include_router(route_router, prefix="/api")
+app.include_router(agent_router, prefix="/api")
 
 
 @app.get("/api/health")

@@ -8,6 +8,9 @@ import {
   RobotOutlined, ScanOutlined, SettingOutlined,
 } from "@ant-design/icons";
 import KnowledgePage from "./pages/KnowledgePage";
+import DetectPage from "./pages/DetectPage";
+import ChatPage from "./pages/ChatPage";
+import ModelsPage from "./pages/ModelsPage";
 
 const { Header, Sider, Content } = Layout;
 
@@ -92,11 +95,12 @@ function Shell({ collapsed, onCollapse }: { collapsed: boolean; onCollapse: (v: 
         </Header>
         <Content style={{ background: "var(--bg)" }}>
           <Routes>
-            <Route path={CHAT.path} element={<Placeholder {...CHAT} />} />
-            <Route path={DETECT.path} element={<Placeholder {...DETECT} />} />
+            <Route path={CHAT.path} element={<ChatPage />} />
+            <Route path={DETECT.path} element={<DetectPage />} />
             <Route path={AGENT.path} element={<Placeholder {...AGENT} />} />
             {SETTINGS.map((p) => (
-              <Route key={p.path} path={p.path} element={<Placeholder {...p} />} />
+              <Route key={p.path} path={p.path}
+                element={p.path === "/models" ? <ModelsPage /> : <Placeholder {...p} />} />
             ))}
             <Route path={KNOWLEDGE.path} element={<KnowledgePage />} />
             <Route path="*" element={<Placeholder {...DETECT} />} />
